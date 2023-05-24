@@ -1,7 +1,8 @@
 name: flutter_portabletext
 description: Render PortableText in Flutter.
-version: 0.0.2
-homepage:
+version: 0.0.3
+homepage: https://github.com/JobiJoba/flutter_portabletext
+repository: https://github.com/JobiJoba/flutter_portabletext
 
 environment:
   sdk: ">=3.0.1 <4.0.0"

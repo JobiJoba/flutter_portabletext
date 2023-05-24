@@ -1,9 +1,13 @@
+// ignore_for_file: avoid_print, unused_element
+
 import 'dart:convert';
 
+import 'package:example/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portabletext/flutter_portabletext.dart';
 import 'package:flutter_portabletext/portable_text.dart';
+import 'package:flutter_sanity/flutter_sanity.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,18 +44,44 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    rootBundle.loadString('assets/ex.json').then((value) async {
-      final data = await json.decode(value) as List<dynamic>;
+
+    initPortableTextWithSanity() async {
+      final sanityClient = SanityClient(
+        dataset: sanityVariable['dataset']!,
+        projectId: sanityVariable['projectId']!,
+      );
+
+      final response = await sanityClient.fetch('*[_type == "post"]');
+
+      final content = response[0]['content'] as List<dynamic>;
 
       final List<PortableText> listPortableText = [];
-      for (var port in data) {
-        final a = PortableText.fromJson(port);
-        listPortableText.add(a);
+      for (var dynamicPort in content) {
+        final portableText = PortableText.fromJson(dynamicPort);
+        listPortableText.add(portableText);
       }
       setState(() {
         portableText = listPortableText;
       });
-    });
+    }
+
+    initPortableTextWithSanity();
+
+    initPortableTextWithJson() async {
+      rootBundle.loadString('assets/ex.json').then((value) async {
+        final data = await json.decode(value) as List<dynamic>;
+        final List<PortableText> listPortableText = [];
+        for (var dynamicPort in data) {
+          final portableText = PortableText.fromJson(dynamicPort);
+          listPortableText.add(portableText);
+        }
+        setState(() {
+          portableText = listPortableText;
+        });
+      });
+    }
+
+    // initPortableTextWithJson();
   }
 
   @override

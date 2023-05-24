@@ -2,7 +2,7 @@
 
 Render PortableText used in Sanity using Flutter.
 
-![Demo](/demo.png "Demo")
+<img src="demo.png" alt="demo image" />
 
 ## Features
 
@@ -19,7 +19,50 @@ flutter pub add flutter_portabletext
 ## Usage
 
 ```dart
-    final portableText = retreiveYourPortableTextField;
+    List<PortableText>? portableText;
+    @override
+    void initState() {
+      super.initState();
+
+      initPortableTextWithSanity() async {
+        final sanityClient = SanityClient(
+          dataset: sanityVariable['dataset']!,
+          projectId: sanityVariable['projectId']!,
+        );
+
+        final response = await sanityClient.fetch('*[_type == "post"]');
+
+        final content = response[0]['content'] as List<dynamic>;
+
+        final List<PortableText> listPortableText = [];
+        for (var dynamicPort in content) {
+          final portableText = PortableText.fromJson(dynamicPort);
+          listPortableText.add(portableText);
+        }
+        setState(() {
+          portableText = listPortableText;
+        });
+      }
+
+      initPortableTextWithSanity();
+
+      initPortableTextWithJson() async {
+        rootBundle.loadString('assets/ex.json').then((value) async {
+          final data = await json.decode(value) as List<dynamic>;
+          final List<PortableText> listPortableText = [];
+          for (var dynamicPort in data) {
+            final portableText = PortableText.fromJson(dynamicPort);
+            listPortableText.add(portableText);
+          }
+          setState(() {
+            portableText = listPortableText;
+          });
+        });
+      }
+
+      // initPortableTextWithJson();
+    }
+    
     ...
     SizedBox(
         width: double.infinity,

@@ -1,3 +1,7 @@
+## 0.0.3
+
+Still WIP improve the readme and add an example with sanity client and/or from a json.
+
 ## 0.0.2
 
 Still WIP but usable with all the default styles.
