@@ -43,3 +43,14 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 example/lib/constants.dart
+
+# Ignoring native folders of the example as they can be re-generated easily using:
+# flutter create --platforms=android,ios,web,windows,macos .
+**/example/android/
+**/example/ios/
+**/example/web/
+examples/**/android/
+examples/**/ios/
+examples/**/web/
+examples/**/windows/
+examples/**/macos/
