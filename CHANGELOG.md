@@ -1,4 +1,4 @@
-## 0.0.3
+## 0.0.4
 
 Still WIP improve the readme and add an example with sanity client and/or from a json.
 

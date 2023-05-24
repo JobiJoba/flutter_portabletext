@@ -1,8 +1,6 @@
-## WIP
-
 Render PortableText used in Sanity using Flutter.
 
-<img src="demo.png" alt="demo image" />
+<img src="https://github.com/JobiJoba/flutter_portabletext/blob/main/demo.png?raw=true" alt="demo image" />
 
 ## Features
 
@@ -62,7 +60,7 @@ flutter pub add flutter_portabletext
 
       // initPortableTextWithJson();
     }
-    
+
     ...
     SizedBox(
         width: double.infinity,
